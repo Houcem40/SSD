@@ -27,6 +27,18 @@ class Note
      */
     private $observation;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Etudiant::class, inversedBy="notes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $Etudiant;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Module::class, inversedBy="notes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $Module;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -52,6 +64,30 @@ class Note
     public function setObservation(string $observation): self
     {
         $this->observation = $observation;
+
+        return $this;
+    }
+
+    public function getEtudiant(): ?Etudiant
+    {
+        return $this->Etudiant;
+    }
+
+    public function setEtudiant(?Etudiant $Etudiant): self
+    {
+        $this->Etudiant = $Etudiant;
+
+        return $this;
+    }
+
+    public function getModule(): ?Module
+    {
+        return $this->Module;
+    }
+
+    public function setModule(?Module $Module): self
+    {
+        $this->Module = $Module;
 
         return $this;
     }

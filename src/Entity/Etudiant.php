@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EtudiantRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -36,6 +38,16 @@ class Etudiant
      * @ORM\Column(type="string", length=30)
      */
     private $cne;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Note::class, mappedBy="Etudiant")
+     */
+    private $notes;
+
+    public function __construct()
+    {
+        $this->notes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -86,6 +98,36 @@ class Etudiant
     public function setCne(string $cne): self
     {
         $this->cne = $cne;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Note>
+     */
+    public function getNotes(): Collection
+    {
+        return $this->notes;
+    }
+
+    public function addNote(Note $note): self
+    {
+        if (!$this->notes->contains($note)) {
+            $this->notes[] = $note;
+            $note->setEtudiant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNote(Note $note): self
+    {
+        if ($this->notes->removeElement($note)) {
+            // set the owning side to null (unless already changed)
+            if ($note->getEtudiant() === $this) {
+                $note->setEtudiant(null);
+            }
+        }
 
         return $this;
     }

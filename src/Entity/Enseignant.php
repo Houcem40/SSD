@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EnseignantRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,6 +33,16 @@ class Enseignant
      * @ORM\Column(type="string", length=20)
      */
     private $cin;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Module::class, mappedBy="enseignant")
+     */
+    private $modules;
+
+    public function __construct()
+    {
+        $this->modules = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -69,6 +81,36 @@ class Enseignant
     public function setCin(string $cin): self
     {
         $this->cin = $cin;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Module>
+     */
+    public function getModules(): Collection
+    {
+        return $this->modules;
+    }
+
+    public function addModule(Module $module): self
+    {
+        if (!$this->modules->contains($module)) {
+            $this->modules[] = $module;
+            $module->setEnseignant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeModule(Module $module): self
+    {
+        if ($this->modules->removeElement($module)) {
+            // set the owning side to null (unless already changed)
+            if ($module->getEnseignant() === $this) {
+                $module->setEnseignant(null);
+            }
+        }
 
         return $this;
     }
