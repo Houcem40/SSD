@@ -40,12 +40,13 @@ final class UserFactory extends ModelFactory
     {
         return [
             // TODO add your default values here (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories)
-            'username' => self::faker()->text(),
-            'roles' => [],
-            'password' => self::faker()->text(),
-            'locale' => self::faker()->text(),
-            'isVerifide' => self::faker()->boolean(),
-            'email' => self::faker()->text(),
+            'username' => 'Admin',
+            'roles' => ['ROLE_ADMIN'],
+            'password' => '$2y$13$w7usfxJhm1MP8qjT8TDNzOq.UuYWFuZszfwqX/agMwG8JeqWgacZ.',
+            'email' => 'admin@fac.ma',
+            'locale'=> 'Fr',
+            'is_verifide'=>1,
+
         ];
     }
 

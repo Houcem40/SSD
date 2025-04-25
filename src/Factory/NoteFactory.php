@@ -41,7 +41,9 @@ final class NoteFactory extends ModelFactory
         return [
             // TODO add your default values here (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories)
             'note' => self::faker()->randomFloat(),
-            'observation' => self::faker()->text(),
+            'observation' => self::faker()->realText(50),
+            'etudiant' => EtudiantFactory:: randomOrCreate(),
+            'module' => ModuleFactory:: randomOrCreate(),
         ];
     }
 

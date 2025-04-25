@@ -40,7 +40,7 @@ final class FiliereFactory extends ModelFactory
     {
         return [
             // TODO add your default values here (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories)
-            'nom' => self::faker()->text(),
+            'nom' => self::faker()->realText(10),
         ];
     }
 

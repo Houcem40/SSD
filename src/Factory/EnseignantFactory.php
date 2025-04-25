@@ -40,9 +40,9 @@ final class EnseignantFactory extends ModelFactory
     {
         return [
             // TODO add your default values here (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories)
-            'nom' => self::faker()->text(),
-            'prenom' => self::faker()->text(),
-            'cin' => self::faker()->text(),
+            'nom' => self::faker()->lastName(),
+            'prenom' => self::faker()->firstName(),
+            'cin' => self::faker()->realText(10),
         ];
     }
 

@@ -40,7 +40,10 @@ final class EtudiantFactory extends ModelFactory
     {
         return [
             // TODO add your default values here (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories)
-            'cne' => self::faker()->text(),
+            'nom'=> self::faker()->lastName(),
+            'prenom'=> self::faker()->firstName(),
+            'adresse'=> self::faker()->address(),
+            'cne' => self::faker()->realText(10),
         ];
     }
 

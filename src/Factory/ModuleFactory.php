@@ -2,7 +2,9 @@
 
 namespace App\Factory;
 
+use App\Entity\Filiere;
 use App\Entity\Module;
+use App\Entity\Semestre;
 use App\Repository\ModuleRepository;
 use Zenstruck\Foundry\RepositoryProxy;
 use Zenstruck\Foundry\ModelFactory;
@@ -40,7 +42,10 @@ final class ModuleFactory extends ModelFactory
     {
         return [
             // TODO add your default values here (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories)
-            'nom' => self::faker()->text(),
+            'nom' => self::faker()->realText(30),
+            'filiere' => FiliereFactory:: randomOrCreate(),
+            'enseignant' => EnseignantFactory::randomOrCreate(),
+            'semestre' => SemestreFactory :: randomOrCreate(),
         ];
     }
 
